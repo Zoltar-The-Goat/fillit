@@ -6,7 +6,7 @@
 /*   By: Zoltar <Zoltar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 00:31:17 by Zoltar            #+#    #+#             */
-/*   Updated: 2017/11/12 05:09:19 by Zoltar           ###   ########.fr       */
+/*   Updated: 2017/11/12 10:01:34 by Zoltar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int ac, char ** av)
 	{
 		if(get_pieces(av[1]))
 		{
+			// all valid pieces and have an array
+			// each ordered and labeled a-z
 			close(fd);
 			return (0);
 		}
