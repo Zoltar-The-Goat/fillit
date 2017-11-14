@@ -6,7 +6,7 @@
 /*   By: Zoltar <Zoltar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:54:21 by Zoltar            #+#    #+#             */
-/*   Updated: 2017/11/12 23:26:02 by Zoltar           ###   ########.fr       */
+/*   Updated: 2017/11/14 01:39:14 by Zoltar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,28 @@
 
 
 // has problems covering same square or going right to left
-int			istrino(char *piece, int s, int c)
+// peice to check s = seed to start with and c == count of blocks
+int			istrino(char *piece, int c)
 {
-	if(piece[s])
+	int x;
+
+	x = 0;
+	while(piece[x])
 	{
-		if (piece[s] == '#')
-			return ((istrino(piece, s + 1, c + 1) + istrino(piece, s + 5, c + 1)) + 1);
-		else if(c == 0)
-			return (istrino(piece, s + 1, c));
+		if (piece[x] == '#')
+			c++;
+		x++;
+	}
+	if (c == 4)
+	{
+		x = -1;
+		while(piece[++x])
+			if(piece[x] == '#' && (!(piece[x + 1] == '#' ||
+									piece[x - 1] == '#' ||
+									piece[x + 5] == '#' ||
+									piece[x - 5] == '#')))
+				return (0);
+		return (c);
 	}
 	return (0);
 }
