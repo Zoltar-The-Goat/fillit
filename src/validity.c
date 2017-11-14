@@ -6,16 +6,13 @@
 /*   By: Zoltar <Zoltar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 09:54:21 by Zoltar            #+#    #+#             */
-/*   Updated: 2017/11/14 01:39:14 by Zoltar           ###   ########.fr       */
+/*   Updated: 2017/11/14 12:17:28 by ananelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/libft.h"
 #include "../includes/fillit.h"
 
-
-// has problems covering same square or going right to left
-// peice to check s = seed to start with and c == count of blocks
 int			istrino(char *piece, int c)
 {
 	int x;

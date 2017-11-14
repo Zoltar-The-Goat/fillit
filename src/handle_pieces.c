@@ -6,7 +6,7 @@
 /*   By: Zoltar <Zoltar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 00:31:30 by Zoltar            #+#    #+#             */
-/*   Updated: 2017/11/14 03:40:44 by Zoltar           ###   ########.fr       */
+/*   Updated: 2017/11/14 13:11:06 by ananelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,33 @@
 int			find_shape(char *piece, int num)
 {
 	int empty;
+	int corner;
+	int x;
+	int y;
+
+	empty = 0;
+	y = 0;
+	x = 19;
+	while (!(piece[x] >= 'A' && piece[x] <= 'Z'))
+		x--;
+	if (piece[x - 4] == (piece[x] >= 'A' && piece[x] <= 'Z') ||
+		piece[x - 8] == (piece[x] >= 'A' && piece[x] <= 'Z') ||
+		piece[x - 12] == (piece[x] >= 'A' && piece[x] <= 'Z'))
+		x++;
+	corner = x;
+	x = corner - (5 * (1 - (num % 10))) - (1 - (num / 10));
+	while (x + y <= corner)
+	{
+		if ((y == num % 10) && (y % 2 == 0))
+		/**/x += 2;
+		else if (y == num % 10)
+		/**/x += 1;
+		if (piece[x + y] == '.' && empty == 0)
+			empty = y * 10;
+		else if (piece[x + y] == '.')
+			empty = empty + y;
+		y++;
+	}
 	return (empty);
 }
 
@@ -26,7 +53,7 @@ static int	dimensions(char *piece, int *empty)
 	int num;
 
 	x = 0;
-	num = 0
+	num = 0;
 	while(piece[x] != '\n')
 	{
 		while(piece[x])// && x < 20)
