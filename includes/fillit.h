@@ -16,10 +16,8 @@
 // DELETE ME B4 GRADING
 #include <stdio.h>
 // DELETE ME B4 GRADING
-
 #include <unistd.h>
 #include <fcntl.h>
-
 
 #define BUF 1
 

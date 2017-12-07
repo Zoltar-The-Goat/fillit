@@ -16,13 +16,13 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 LIB = ./lib
-SRC = ./src
+SRC = ./src/*
 
 all : $(NAME)
 
 $(NAME) :
-			$(CC) $(FLAGS) -o $(NAME)
-
+			$(CC) $(FLAGS) -o $(NAME) $(SRC) $(LIB)/ft_memalloc.c $(LIB)/ft_bzero.c
+																				$(LIB)/ft_memset.c
 clean :
 
 fclean :

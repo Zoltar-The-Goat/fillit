@@ -6,41 +6,39 @@
 /*   By: Zoltar <Zoltar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/12 00:31:30 by Zoltar            #+#    #+#             */
-/*   Updated: 2017/11/14 13:11:06 by ananelli         ###   ########.fr       */
+/*   Updated: 2017/11/16 19:03:30 by Zoltar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/libft.h"
 #include "../includes/fillit.h"
 
-int			find_shape(char *piece, int num)
+int			ret_empty(char *piece, int num)
 {
 	int empty;
 	int corner;
 	int x;
 	int y;
 
-	empty = 0;
+	empty = -1;
 	y = 0;
 	x = 19;
 	while (!(piece[x] >= 'A' && piece[x] <= 'Z'))
 		x--;
-	if (piece[x - 4] == (piece[x] >= 'A' && piece[x] <= 'Z') ||
-		piece[x - 8] == (piece[x] >= 'A' && piece[x] <= 'Z') ||
-		piece[x - 12] == (piece[x] >= 'A' && piece[x] <= 'Z'))
-		x++;
+	if (piece[x - 4] >= 'A' && piece[x - 4] <= 'Z')
+	 	x++;
 	corner = x;
-	x = corner - (5 * (1 - (num % 10))) - (1 - (num / 10));
+	x = corner - ((5 * ((num % 10) - 1)) + ((num / 10) - 1));
+	printf("x: %d, corner: %d\n\n", x, corner);
 	while (x + y <= corner)
 	{
-		if ((y == num % 10) && (y % 2 == 0))
-		/**/x += 2;
-		else if (y == num % 10)
-		/**/x += 1;
-		if (piece[x + y] == '.' && empty == 0)
+		if ((y == num % 10 && y % 2 == 0) || (y == num % 10 && y % 3 == 0))
+			x = (x - y) + 5;
+		if (piece[x + y] == '.' && empty == -1)
 			empty = y * 10;
 		else if (piece[x + y] == '.')
 			empty = empty + y;
+		printf("x: %d, y: %d, empty: %d\n", x, y, empty);
 		y++;
 	}
 	return (empty);
@@ -91,7 +89,7 @@ static int	dimensions(char *piece, int *empty)
 			x++;
 	}
 	if ((num / 10) * (num % 10) != 4)
-		*empty = find_shape(piece, num);
+		*empty = ret_empty(piece, num);
 	return (num);
 }
 
@@ -170,11 +168,16 @@ int			get_pieces(char *file)
 		}
 	}
 	piece_arr[num_piece] = "\0";
+
+	// printf("%s\t %d\n\n", piece_arr[3], 3);
+	// printf("\nLxw: %d, empty: %d\n", dimensions(piece_arr[3], &empty), empty);
+	// printf("---------------------------------------\n\n");
+
 	int z = -1;
 	while(piece_arr[++z] && z < num_piece)
 	{
 		printf("%s\t %d\n\n", piece_arr[z], z);
-		printf("Lxw: %d, empty: %d\n", dimensions(piece_arr[z], &empty), empty);
+		printf("\nLxw: %d, empty: %d\n", dimensions(piece_arr[z], &empty), empty);
 		printf("---------------------------------------\n\n");
 	}
 

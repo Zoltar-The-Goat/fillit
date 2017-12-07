@@ -42,11 +42,9 @@ int			is_valid(int fd)
 {
 	int ret;
 	int x;
-	int count;
 	char c;
 
 	x = 1;
-	count = 0;
 	while ((ret = read(fd, &c, BUF)) > 0)
 	{
 		if (c != '\n' && c != '#' && c != '.')
